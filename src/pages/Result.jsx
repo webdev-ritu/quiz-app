@@ -16,7 +16,7 @@ const Result = () => {
                     navigate("/login");
                     return;
                 }
-                const response = await axios.get(`https://gaudy-feather-meadowlark.glitch.me/api/result/${userId}`);
+                const response = await axios.get(`https://equatorial-cloud-kilogram.glitch.me/api/result/${userId}`);
                 setScore(response.data.score);
 
             }catch(error){

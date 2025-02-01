@@ -10,11 +10,12 @@ const Login = ({setIsAuthenticated}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("https://gaudy-feather-meadowlark.glitch.me/login", {
+            const response = await axios.post("https://equatorial-cloud-kilogram.glitch.me/login", {
                 username,
                 password,
             });
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userId", response.data.userId);
            setIsAuthenticated(true);
            navigate("/quiz");
         } catch (error) {
@@ -22,8 +23,8 @@ const Login = ({setIsAuthenticated}) => {
         }
     };
     return (
-        <div>
-            <h1>Login</h1>
+        <div className="container">
+            <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"

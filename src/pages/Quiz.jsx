@@ -4,23 +4,28 @@ import axios from "axios";
 
 const Quiz = () => {
     const [questions, setQuestions] = useState([]);
-    const[userAnswer, setUserAnswer] = useState({});
+    const[userAnswers, setUserAnswers] = useState({});
     const [feedback,setFeedback] = useState({});
     const navigate = useNavigate();
     useEffect(()=> {
         const fetchQuestions = async () => {
             try {
-                const response = await axios.get("https://gaudy-feather-meadowlark.glitch.me/api/question");
-                setQuestions(response.data);
-            }catch (error){
-                console.error("error fetchin questions", error);
+                const response = await axios.get("https://equatorial-cloud-kilogram.glitch.me/api/questions");
+                if(Array.isArray(response.data)){
+                    setQuestions(response.data);
+                }else{
+                    console.error("expected an array", response.data);
+                }
+            }catch(error){
+                console.error("error fetching questions", error.response.data? error.response.data : error.messegae);
             }
         };
-        fetchQuestions();
-    },[]);
+            fetchQuestions();
+        },[]);
+        
     const handleAnswerChange = (questionId, selectdOption) => {
-        setUserAnswer({
-            ...userAnswer,
+        setUserAnswers({
+            ...userAnswers,
             [questionId]: selectdOption
         });
         const correctAnswer = questions.find(q => q.id === questionId).correctAnswer;
@@ -30,48 +35,38 @@ const Quiz = () => {
         });
     };
     const handleSubmitQuiz = () => {
-        localStorage.setItem("userAnswer", JSON.stringify(userAnswer));
+        localStorage.setItem("userAnswer", JSON.stringify(userAnswers));
         navigate("/result");
     };
     return (
-        <div>
+        <div className="container">
           <h1>Quiz Page</h1>
           {questions.length === 0 ? (
             <p>Loading question...</p>
           ) : ( 
-            questions.map((question) => (
-                <div key={question.id}>
+            questions.map((questions) => (
+                <div key={questions.id} className="question-container">
                     <h3>
-                        {question.text}
+                        {questions.text}
                     </h3>
-                    {question.option.map((option, index)=>(
-                        <div key = {index}>
-                            <input type="radio"
-                            name={`question${question.id}`}
-                            value={option}
-                            onChange={()=> handleAnswerSelect(question.id, option)}
-                            checked={userAnswer[question.id] === option}    
+                    <div className="options">
+                    {question.options.map((option, index)=>(
+                        <label key={index} className={userAnswers[questions.id] === option ?(feedback[questions.id] ? "correct" : "wrong") : ""}>
+                            <input
+                                type="radio"
+                                value={option}
+                               name ={`question-${questions.id}`}
+                               onChange={()=> handleAnswerChange(questions.id, option)}
                             />
-                            <label>{option}</label>
-                        </div>
+                            {option}
+                        </label>
                     ))}
-                    {userAnswer[question.id] && (
-                        <p style={{color: feedback[question.id] ? "green" : "red"}}>
-                            {feedback[question.id] ? "Correct" : "Incorrect"}
-                        </p>
-                    )}
+                    </div>
                 </div>
             ))
             )}
-            {questions.length>0 && (
-                <button onClick={handleSubmitQuiz}>Submit Quiz</button>
-            )}
-            
+            {question.length > 0&& <button onclick={handleSubmitQuiz}>Submit Quiz</button>}
         </div>
     );
 };
 export default Quiz;
-
-
-                    
-

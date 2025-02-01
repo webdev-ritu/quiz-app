@@ -1,42 +1,104 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin : 0;
+  padding: 0;
+  background-color: #f4f4f4;
   text-align: center;
 }
+nav{
+  background-color: #fdfafa;
+  color: #131212;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+nav a{
+  color: #0f0f0f;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 5px 5px;
+}
+nav a:hover{
+  background-color: #727af1;
+  border-radius: 5px;
+}
+nav button{
+  background-color: #2008fa;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+nav button:hover{
+  background-color: #777;
+}
+.container{
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+button{
+  background-color: #3905f7;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:hover{
+  background-color: #777;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+form input{
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.question-container{
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 20px;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.question-container h2 h3{
+  margin-bottom: 10px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.options label{
+  display: block;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
 }
-
-.card {
-  padding: 2em;
+.options input{
+  margin-right: 10px;
 }
-
-.read-the-docs {
-  color: #888;
+.correct{
+  color: green;
+  font-weight: bolder;
+}
+.wrong{
+  color: red;
+  font-weight: bolder;
+}
+.score{
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 20px;
 }

@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
  const Home = () =>{
     return (
-        <div>
+        <div className="container">
             <h1>Welcome to the Quiz App!</h1>
             <Link to="/login"> Please Login</Link>
         </div>
